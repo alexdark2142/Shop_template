@@ -8,16 +8,16 @@ $action = $_POST['action_id'];
 $description = $_POST['description'];
 
 if ($action == 'add_black_list') {
-    $check = $link->query("SELECT `status` FROM `user` WHERE `id` = '$id'")->fetch_array();
+    $check = $link->query("SELECT `ban` FROM `user` WHERE `id` = '$id'")->fetch_array();
     $status = $check[0];
-    if ($status !== 'Заблокированный') {
-        if ($status !== 'В черном списке') {
+    if ($status != -1) {
+        if ($status != 1) {
             $query = $link->query("SELECT * FROM `black_list` WHERE `id_user` = '$id'");
             $result = $query->fetch_all();
             $black_list = $link->query(
                 "INSERT INTO `black_list`(`id_user`, `description`)
             VALUES ('$id','$description')");
-            $user_status = $link->query("UPDATE `user` SET `status`= 'В черном списке' WHERE `id` = '$id'");
+            $user_status = $link->query("UPDATE `user` SET `ban`= 1 WHERE `id` = '$id'");
         }
         else {
             echo 'black_list';
@@ -28,10 +28,10 @@ if ($action == 'add_black_list') {
     }
 }
 elseif ($action == 'block') {
-    $query = $link->query("SELECT `status` FROM `user` WHERE `id` = '$id'");
+    $query = $link->query("SELECT `ban` FROM `user` WHERE `id` = '$id'");
     $result = $query->fetch_all();
-    if ($result[0][0] !== 'Заблокированный') {
-        $user_status = $link->query("UPDATE `user` SET `status`= 'Заблокированный' WHERE `id` = '$id'");
+    if ($result[0][0] != -1) {
+        $user_status = $link->query("UPDATE `user` SET `ban`= -1 WHERE `id` = '$id'");
     }
     else {
         echo 'true';

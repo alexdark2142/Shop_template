@@ -55,15 +55,17 @@ function open_answer_msg(id) {
 
 function send_answer_msg(id, id_to, id_from, theme) {
     let msg = document.getElementById('answer_msg_'+id).value;
+    let element = document.getElementById("msg"+id);
     $.ajax({
         method: "POST",
         url: "action/message.php",
-        data: {id_to:id_to, id_from:id_from, msg:msg, theme:theme},
+        data: {id_msg:id, id_to:id_to, id_from:id_from, msg:msg, theme:theme},
         success:function (data){
             if (data == 'true') {
                 $('#block_msg_'+id).slideToggle('slow');
                 M.toast({html: 'Сообщения отправлено!', classes: 'success'});
                 document.getElementById('answer_msg_'+id).value = '';
+                element.parentNode.removeChild(element);
             }
             else {
                 M.toast({html: 'Сообщения не отпралено!', classes: 'error'});

@@ -13,7 +13,7 @@
 
    foreach ($message as $msg) {
   ?>
-  <div class="message row d-flex justify-content-between">
+  <div id="msg<?php echo $msg[3]; ?>" class="message row d-flex justify-content-between">
     <div class="message__data col-sm-12 col-md-12 col-lg-3  d-flex align-items-center justify-content-center">
       <div class="name"><?php echo $msg[0]; ?></div>
       <div class="date"><?php echo $msg[1]; ?></div>
@@ -29,11 +29,11 @@
   <div id="msg_<?php echo $msg[3]; ?>" class="msg row">
      <p><?php echo $msg[2]; ?></p>
   </div>
-   <div id="block_msg_<?php echo $msg[3]; ?>" class="msg row">
-     <input id="theme_<?php echo $msg[3]; ?>" class="theme" type="text" value="Тема: <?php echo $msg[6]; ?>" disabled="disabled">
-     <textarea name="msg" id="answer_msg_<?php echo $msg[3]; ?>" cols="30" rows="10"></textarea>
-     <input id="btn_<?php echo $msg[3]; ?>" onclick="send_answer_msg(<?php echo $msg[3]; ?>,<?php echo $msg[4]; ?>, <?php echo $msg[5]; ?>, '<?php echo $msg[6]; ?>')" type="submit" class="btn btn-primary" value="Ответить">
-   </div>
+  <div id="block_msg_<?php echo $msg[3]; ?>" class="msg row">
+   <input id="theme_<?php echo $msg[3]; ?>" class="theme" type="text" value="Тема: <?php echo $msg[6]; ?>" disabled="disabled">
+   <textarea name="msg" id="answer_msg_<?php echo $msg[3]; ?>" cols="30" rows="10"></textarea>
+   <input id="btn_<?php echo $msg[3]; ?>" onclick="send_answer_msg(<?php echo $msg[3]; ?>,<?php echo $msg[4]; ?>, <?php echo $msg[5]; ?>, '<?php echo $msg[6]; ?>')" type="submit" class="btn btn-primary" value="Ответить">
+  </div>
   <?php
   }
   ?>

@@ -18,7 +18,7 @@
       <?php
       $query = $link->query(
         "SELECT 
-          `user`.`id`, `user`.`login`, `user`.`email`, `user`.`balance`, COUNT(`people`.`id`) AS `count`, `user`.`status`
+          `user`.`id`, `user`.`login`, `user`.`email`, `user`.`balance`, COUNT(`people`.`id`) AS `count`, `user`.`ban`
         FROM
           `user`
         LEFT JOIN 
@@ -34,7 +34,17 @@
         <td><?php echo $user[2]; ?></td>
         <td><?php echo $user[3]; ?></td>
         <td><?php echo $user[4]; ?></td>
-        <td id="status_<?php echo $user[0]; ?>"><?php echo $user[5]; ?></td>
+        <td id="status_<?php echo $user[0]; ?>"><?php
+            if ($user[5] == -1) {
+              echo 'Заблокирован';
+            }
+            elseif ($user[5] == 1){
+                echo 'В черном списке';
+            }
+            else {
+                echo '';
+            }
+            ?></td>
         <td>
           <select id="action_<?php echo $user[0]; ?>" name="select" class="custom-select">
             <option value="add_black_list">Добавить в черный список</option>
