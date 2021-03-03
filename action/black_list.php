@@ -14,3 +14,7 @@ $check_status = $link->query("SELECT `status` FROM `user` WHERE `id` = '$id_user
 if ($check_status[0] == 'В черном списке') {
     $status = $link->query("UPDATE `user` SET `status`= NULL WHERE `id` = '$id_user'");
 }
+
+if ($query) {
+    echo 'success';
+}

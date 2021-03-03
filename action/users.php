@@ -10,16 +10,21 @@ $description = $_POST['description'];
 if ($action == 'add_black_list') {
     $check = $link->query("SELECT `status` FROM `user` WHERE `id` = '$id'")->fetch_array();
     $status = $check[0];
-    if ($status !== 'Заблокированный' && $status !== 'В черном списке') {
-        $query = $link->query("SELECT * FROM `black_list` WHERE `id_user` = '$id'");
-        $result = $query->fetch_all();
-        $black_list = $link->query(
-            "INSERT INTO `black_list`(`id_user`, `description`)
+    if ($status !== 'Заблокированный') {
+        if ($status !== 'В черном списке') {
+            $query = $link->query("SELECT * FROM `black_list` WHERE `id_user` = '$id'");
+            $result = $query->fetch_all();
+            $black_list = $link->query(
+                "INSERT INTO `black_list`(`id_user`, `description`)
             VALUES ('$id','$description')");
-        $user_status = $link->query("UPDATE `user` SET `status`= 'В черном списке' WHERE `id` = '$id'");
+            $user_status = $link->query("UPDATE `user` SET `status`= 'В черном списке' WHERE `id` = '$id'");
+        }
+        else {
+            echo 'black_list';
+        }
     }
     else{
-        echo 'true';
+        echo 'block';
     }
 }
 elseif ($action == 'block') {

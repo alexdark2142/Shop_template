@@ -11,6 +11,10 @@ $query = $link->query("UPDATE `people` SET `proverka_photo` = '$check_photo' WHE
 
 $dir = '../../img/proverka_photo/' . trim($id);
 
+if ($query) {
+    echo 'success';
+}
+
 $RDir = new removeDir();
 
 $deleteDir = $RDir->RDir($dir);

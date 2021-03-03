@@ -38,6 +38,6 @@
   }
   ?>
   <div class="btn-list d-flex justify-content-center">
-    <button onclick="M.toast({html: 'Сообщения отправлено!', displayLength: 100000})" type="submit"  class="col btn btn-outline-info">Показать еще...</button>
+    <button type="submit"  class="col btn btn-outline-info">Показать еще...</button>
   </div>
 </div>

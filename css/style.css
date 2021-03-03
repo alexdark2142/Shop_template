@@ -160,4 +160,34 @@ h2 {
   border-radius: 0 0 5px 5px;
 }
 
+#toast-container {
+  text-align: center;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}
 
+
+#toast-container .success{
+  color: #09ff3f;
+  border-color: #46f86f;
+}
+
+#toast-container .warning{
+  color: #faba02;
+  border-color: #fdcf33;
+}
+
+#toast-container .error{
+  color: #ff0015;
+  border-color: #ff1f3c;
+}
+
+.toast{
+  background-color:  #1a1f1e;
+  width: 100%;
+  margin: 10px 0 0 0 ;
+  padding: 15px 10px;
+  font-size: 18px;
+  border-radius: 10px;
+}

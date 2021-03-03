@@ -29,7 +29,9 @@ function check_photo(id, check, name) {
         url: "action/confirm_photo.php",
         data: {id:id, photo:check, name:name},
         success:function (data){
-            $('#photo_'+id).hide('slow');
+           if (data == 'success') {
+               $('#photo_'+id).hide('slow');
+           }
         }
     });
 
@@ -60,6 +62,11 @@ function send_answer_msg(id, id_to, id_from, theme) {
         success:function (data){
             if (data == 'true') {
                 $('#block_msg_'+id).slideToggle('slow');
+                M.toast({html: 'Сообщения отправлено!', classes: 'success'});
+                document.getElementById('answer_msg_'+id).value = '';
+            }
+            else {
+                M.toast({html: 'Сообщения не отпралено!', classes: 'error'});
             }
         }
     });
@@ -74,7 +81,10 @@ function removeFromBlackList(id) {
         url: "action/black_list.php",
         data:{id:id},
         success:function (data) {
-            element.parentNode.removeChild(element);
+            if (data == 'success') {
+                element.parentNode.removeChild(element);
+                M.toast({html: 'Пользователь удален из черного списка.', classes: 'success'});
+            }
         }
     });
 }
@@ -90,11 +100,15 @@ function getOptions(id) {
                 url: "action/users.php",
                 data: {id_user:id, action_id:idValue, description:description},
                 success:function (data){
-                    if (data == 'true') {
-                        alert('Пользователь заблокирован либо уже в черном списке !');
+                    if (data == 'block') {
+                        M.toast({html: 'Пользователь заблокирован!', classes: 'warning'});
+                    }
+                    else if (data == 'black_list') {
+                        M.toast({html: 'Пользователь уже в черном списке!', classes: 'warning'});
                     }
                     else {
                         $('#status_'+id).load('/admin/page/users.php' + ' #status_'+id);
+                        M.toast({html: 'Пользователь добавлен в черный список!', classes: 'success'});
                     }
                 }
             });
@@ -107,10 +121,10 @@ function getOptions(id) {
             data: {id_user:id, action_id:idValue, description:description},
             success:function (data){
                 if (data == 'true') {
-                    alert('Пользователь уже заблокирован!');
+                    M.toast({html: 'Пользователь уже заблокирован!', classes: 'warning'})
                 }
                 else {
-                    alert('Пользователь заблокирован!');
+                    M.toast({html: 'Пользователь заблокирован!', classes: 'success'});
                     $('#status_'+id).load('/admin/page/users.php' + ' #status_'+id);
                 }
             }
@@ -122,7 +136,7 @@ function getOptions(id) {
             url: "action/users.php",
             data: {id_user:id, action_id:idValue, description:description},
             success:function (data){
-                alert('Пользователь удален!');
+                M.toast({html: 'Пользователь удален!', classes: 'success'});
                 $('#user_'+id).hide('slow');
             }
         });
