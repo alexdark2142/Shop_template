@@ -1,0 +1,163 @@
+body {
+  background-image: url("../img/bg.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  padding: 30px;
+  font-family: 'Roboto Slab', serif;
+  color: white;
+}
+
+.check_img {
+  height: 0;
+  padding-top: 80%;
+  position: relative;
+  display: block;
+}
+
+.img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.container-fluid {
+  box-shadow: 2px 2px 3px #98bcff, -2px -2px 3px #98bcff, 2px -2px 3px #98bcff, -2px 2px 3px #98bcff;
+}
+
+.menu__items ul li {
+  display: block;
+  margin: 10px 0;
+}
+
+a {
+  font-size: 20px;
+  color: white;
+}
+
+a:hover {
+  color: #83aef6;
+}
+
+h1, .user-name {
+  font-weight: 700;
+  font-size: 20px;
+  padding: 10px;
+}
+
+h2 {
+  padding-top: 10px;
+  font-size: 18px;
+}
+
+.menu {
+  background: rgba(176, 183, 201, 0.3);
+  border: 1px solid #83aef6;
+}
+
+.page {
+  padding: 0;
+  background-color: rgba( 26, 26, 29, 0.7);
+}
+
+.menu__header {
+  margin-bottom: 10px;
+}
+
+.menu__items {
+  padding: 10px;
+}
+
+.page__header {
+  background-color: #1d1d1d;
+  border-bottom: 2px solid #83aef6;
+}
+
+.page__content {
+  padding: 30px;
+}
+
+.btn-group {
+  width: 100%;
+}
+
+.message, .black-list, .msg  {
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px solid deepskyblue;
+  border-radius: 5px;
+}
+
+.btn-outline-success {
+  color: white;
+  background-color: green;
+}
+
+.message__data {
+  padding: 10px 0;
+}
+
+.name {
+  margin-right: 20px ;
+}
+.name, .date {
+  display: inline-block;
+}
+
+.btn-list {
+  margin: 15px;
+}
+
+.rounded-circle {
+  max-width: 80px;
+}
+
+.table>tbody {
+  vertical-align: middle;
+}
+
+.custom-select {
+  color: whitesmoke;
+  background-color: #1a1a1d;
+  border: 2px solid #1a1f1e;
+  padding: 7px;
+  border-radius: 5px;
+}
+
+/*---Messages---*/
+
+.msg {
+  padding: 15px;
+  line-height: 1.5;
+  background-color:  #1a1a1d;
+  color: white;
+  font-size: 18px;
+  display: none;
+}
+
+.msg p {
+  text-indent: 30px;
+  margin: 0;
+}
+
+.msg .theme {
+  padding: 5px 10px;
+  color: white;
+  background-color:  #1a1f1e;
+  border-radius: 5px 5px 0 0;
+  border: 1px solid deepskyblue;
+}
+
+.msg textarea {
+  border: 1px solid deepskyblue;
+}
+
+.msg input {
+  border-radius: 0 0 5px 5px;
+}
+
+
