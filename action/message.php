@@ -14,6 +14,6 @@ $send_msg = $link->query(
 
 
 if ($send_msg) {
-    $delete_msg = $link->query("DELETE * FROM `messages` WHERE '$id'");
+    $delete_msg = $link->query("DELETE FROM `messages` WHERE `id` = '$id'");
     echo 'true';
 }
