@@ -49,15 +49,15 @@ $users = $query->fetch_all();
         <td><?php echo $user[3]; ?></td>
         <td>
           <button onclick="openModal(this)" id="openModal" class="btn-show-form"><?php echo $user[4]; ?></button>
-          <div id="modal" class="modal d-flex align-items-center justify-content-center">
+          <div id="modal" class="modal d-flex align-items-center">
             <div class="content-modal">
               <div class="modal_header d-flex">
                 <h1 class="col-7 modal-title d-flex align-items-center justify-content-end">Анкеты пользователя "<?php echo $user[1]; ?>"</h1>
                 <div id="close_modal" class="col d-flex align-items-center justify-content-end" onclick="closeModal(this)"><img src="img/close.png" alt="X"></div>
               </div>
+              <div class="modal_body table-responsive">
               <?php if ($user[4] > 0) { ?>
-                <div class="modal_body table-responsive">
-                  <table class="table table-striped table-dark text-center table-modal">
+                <table class="table table-striped table-dark text-center table-modal">
                     <thead>
                     <tr>
                       <th scope="col">#</th>
@@ -88,10 +88,10 @@ $users = $query->fetch_all();
                     <?php  } ?>
                     </tbody>
                   </table>
-                </div>
               <?php } else {?>
                 <h2 class="d-flex align-items-center justify-content-center">У этого пользователя нет анкет для показа</h2>
               <?php } ?>
+              </div>
             </div>
           </div>
         </td>

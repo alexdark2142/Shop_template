@@ -236,6 +236,7 @@ h2 {
 }
 
 .content-modal{
+  width: inherit;
   border-radius: 7px;
   padding: 10px 30px 30px;
   background-color: #1a1a1d;
@@ -305,5 +306,6 @@ padding-top: 100%; /* (300 / 300) * 100%; */
 }
 
 .modal table td {
+  width: 100px;
   padding: 10px;
 }
