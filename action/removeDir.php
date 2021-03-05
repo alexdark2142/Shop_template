@@ -11,7 +11,7 @@ class removeDir {
                 // удаляем только содержимое папки
                 if ( $element != '.' AND $element != '..' )  {
                     $tmp = $path . '/' . $element;
-                    chmod( $tmp, 0777 );
+                    chmod( $tmp, 777 );
                     // если элемент является папкой, то
                     // удаляем его используя нашу функцию RDir
                     if ( is_dir( $tmp ) ) {

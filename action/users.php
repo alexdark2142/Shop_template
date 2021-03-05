@@ -32,8 +32,17 @@ elseif ($action == 'block') {
     $result = $query->fetch_all();
     if ($result[0][0] != -1) {
         $user_status = $link->query("UPDATE `user` SET `ban`= -1 WHERE `id` = '$id'");
+        $delete_black_list = $link->query("DELETE FROM `black_list` WHERE `id_user` = '$id'");
     }
     else {
+        echo 'true';
+    }
+}
+elseif ($action == 'unblock') {
+    $query = $link->query("SELECT `ban` FROM `user` WHERE `id` = '$id'");
+    $result = $query->fetch_all();
+    if ($result[0][0] == -1) {
+        $user_status = $link->query("UPDATE `user` SET `ban`= 0 WHERE `id` = '$id'");
         echo 'true';
     }
 }

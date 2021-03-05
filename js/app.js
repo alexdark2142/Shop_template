@@ -20,6 +20,7 @@ $(document).ready(function(){
         // Stop normal link behavior
         return false;
     });
+
 });
 
 function check_photo(id, check, name) {
@@ -36,7 +37,6 @@ function check_photo(id, check, name) {
     });
 
 }
-
 
 function open_msg(id){
     $( "#msg_"+id ).slideToggle( "fast" );
@@ -58,7 +58,7 @@ function send_answer_msg(id, id_to, id_from, theme) {
     let element = document.getElementById("msg"+id);
     $.ajax({
         method: "POST",
-        url: "action/message.php",
+        url: "action/send_message.php",
         data: {id_msg:id, id_to:id_to, id_from:id_from, msg:msg, theme:theme},
         success:function (data){
             if (data == 'true') {
@@ -72,6 +72,23 @@ function send_answer_msg(id, id_to, id_from, theme) {
     });
 }
 
+function delete_msg(id) {
+    let element = document.getElementById("msg"+id);
+    $.ajax({
+        method: "POST",
+        url: "action/delete_message.php",
+        data: {id_msg:id, },
+        success:function (data){
+            if (data == 'true') {
+                M.toast({html: 'Сообщения удалено!', classes: 'success'});
+                element.parentNode.removeChild(element);
+            }
+            else {
+                M.toast({html: 'Сообщения не удалено!', classes: 'error'});
+            }
+        }
+    });
+}
 
 function removeFromBlackList(id) {
     let element = document.getElementById("black_"+id);
@@ -89,7 +106,7 @@ function removeFromBlackList(id) {
     });
 }
 
-function getOptions(id) {
+function getOptions(self, id) {
     let idValue = document.getElementById('action_'+id).value;
     let description;
     if (idValue == 'add_black_list') {
@@ -107,7 +124,7 @@ function getOptions(id) {
                         M.toast({html: 'Пользователь уже в черном списке!', classes: 'warning'});
                     }
                     else {
-                        $('#status_'+id).load('/admin/page/users.php' + ' #status_'+id);
+                        self.parentNode.parentNode.childNodes[11].innerText='В черном списке';
                         M.toast({html: 'Пользователь добавлен в черный список!', classes: 'success'});
                     }
                 }
@@ -118,14 +135,28 @@ function getOptions(id) {
         $.ajax({
             method: "POST",
             url: "action/users.php",
-            data: {id_user:id, action_id:idValue, description:description},
+            data: {id_user:id, action_id:idValue},
+            success:function (data){
+                if (data != 'true') {
+                    M.toast({html: 'Пользователь заблокирован!', classes: 'success'});
+                    self.parentNode.parentNode.childNodes[11].innerText='Заблокирован';
+                    self.parentNode.previousSibling.previousSibling.childNodes[1].childNodes[3].innerText='Разблокировать';
+                    self.parentNode.previousSibling.previousSibling.childNodes[1].childNodes[3].value='unblock';
+                }
+            }
+        });
+    }
+    else if (idValue == 'unblock') {
+        $.ajax({
+            method: "POST",
+            url: "action/users.php",
+            data: {id_user:id, action_id:idValue},
             success:function (data){
                 if (data == 'true') {
-                    M.toast({html: 'Пользователь уже заблокирован!', classes: 'warning'})
-                }
-                else {
-                    M.toast({html: 'Пользователь заблокирован!', classes: 'success'});
-                    $('#status_'+id).load('/admin/page/users.php' + ' #status_'+id);
+                    M.toast({html: 'Пользователь разблокирован!', classes: 'success'});
+                    self.parentNode.parentNode.childNodes[11].innerText='';
+                    self.parentNode.previousSibling.previousSibling.childNodes[1].childNodes[3].innerText='Заблокировать';
+                    self.parentNode.previousSibling.previousSibling.childNodes[1].childNodes[3].value='block';
                 }
             }
         });
@@ -141,4 +172,28 @@ function getOptions(id) {
             }
         });
     }
+}
+
+function openModal(self) {
+    self.nextSibling.nextSibling.style.transform="scale(1)";
+    document.body.style.overflow="hidden";
+}
+
+function closeModal(self) {
+    self.parentNode.parentNode.parentNode.style.transform="scale(0)";
+    document.body.style.overflow="visible";
+}
+
+function deletePeople(self, id) {
+    $.ajax({
+        method: "POST",
+        url: "action/remove_people.php",
+        data:{id:id},
+        success:function (data) {
+            if (data == 'success') {
+                self.parentNode.parentNode.parentNode.removeChild(self.parentNode.parentNode);
+                M.toast({html: 'Анкета удалена.', classes: 'success'});
+            }
+        }
+    });
 }

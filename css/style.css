@@ -16,6 +16,18 @@ body {
   display: block;
 }
 
+.btn-img, .btn-show-form {
+  background: none;
+}
+
+.btn-show-form {
+  color: white;
+}
+
+.btn-show-form:hover {
+  color: deepskyblue;
+}
+
 .img {
   position: absolute;
   top: 50%;
@@ -85,20 +97,9 @@ h2 {
   width: 100%;
 }
 
-.message, .black-list, .msg  {
-  margin-bottom: 5px;
-  padding: 10px;
-  border: 1px solid deepskyblue;
-  border-radius: 5px;
-}
-
 .btn-outline-success {
   color: white;
   background-color: green;
-}
-
-.message__data {
-  padding: 10px 0;
 }
 
 .name {
@@ -128,7 +129,18 @@ h2 {
   border-radius: 5px;
 }
 
-/*---Messages---*/
+/*--------------------Messages-----------------------*/
+
+.message, .black-list, .msg  {
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px solid deepskyblue;
+  border-radius: 5px;
+}
+
+.message__data {
+  padding: 10px 0;
+}
 
 .msg {
   padding: 15px;
@@ -160,13 +172,26 @@ h2 {
   border-radius: 0 0 5px 5px;
 }
 
+.show_more {
+  transition: active .5s;
+}
+
+.show_more:active {
+  margin-top: 3px;
+  background: #088BD0;
+}
+
+.msg_row {
+  display: none;
+}
+
+/*--------------------------TOAST---------------------------*/
 #toast-container {
   text-align: center;
   position: fixed;
   right: 10px;
   bottom: 10px;
 }
-
 
 #toast-container .success{
   color: #09ff3f;
@@ -190,4 +215,95 @@ h2 {
   padding: 15px 10px;
   font-size: 18px;
   border-radius: 10px;
+}
+
+/*--------------------------MODAL---------------------------------*/
+.modal {
+  overflow: auto;
+  opacity: 1;
+  pointer-events: all;
+  display: block;
+  padding: 40px;
+  background-color: rgba(16,20,30,0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 9;
+  transform: scale(0);
+  transition: 200ms ease-in-out;
+}
+
+.content-modal{
+  border-radius: 7px;
+  padding: 10px 30px 30px;
+  background-color: #1a1a1d;
+
+}
+
+.modal_header h1{
+  margin: 0; !important;
+}
+
+#close_modal {
+  width: auto;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.6s;
+}
+
+#close_modal img {
+  height: 45px;
+  transition: all 0.6s;
+}
+
+#close_modal img:hover {
+color: red;
+transform: rotate(90deg);
+}
+.modal_body {
+width: 100%;
+box-shadow: 0 4px 12px rgba(0, 0, 0, .8), 0 16px 20px  rgba(0, 0, 0, .8);
+margin: 15px auto;
+}
+
+.table-modal {
+margin: 0;
+min-width: 950px;
+}
+
+.ratio_image {
+width: 100px;
+height: 100px;
+float: left;
+margin: 20px;
+position: relative;
+overflow: hidden;
+}
+
+.ratio_image:before {
+width: 100%;
+display: block;
+content: "";
+}
+
+.ratio_image img {
+min-width: 100%;
+min-height: 100%;
+position: absolute;
+top: 0;
+left: 0;
+}
+
+.ratio_image img {
+width: 100%;
+}
+
+.ratio_image_1x1:before {
+padding-top: 100%; /* (300 / 300) * 100%; */
+}
+
+.modal table td {
+  padding: 10px;
 }
