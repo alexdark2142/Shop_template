@@ -6,7 +6,10 @@ $query = $link->query(
     "SELECT `user`.`login`, `black_list`.`description`, `black_list`.`id` FROM `user` 
     INNER JOIN `black_list` ON `black_list`.`id_user` = `user`.`id` 
 ");
-$black_list = $query->fetch_all();
+
+while($res[]=$query->fetch_array()) {
+    $black_list = $res;
+};
 
 if (!empty($black_list)) {
   foreach ($black_list as $value) { ?>
@@ -28,7 +31,7 @@ if (!empty($black_list)) {
   }
 }
 else {
-  echo '<h1>Черный список пуст.</h1>';
+  echo '<h3>Черный список пуст</h3>';
 }
 ?>
 </div>

@@ -15,8 +15,10 @@ if (isset($_POST['login']) && isset($_POST['pass'])) {
     }
     else{
         $query = $link->query("SELECT * FROM `admin` WHERE `login` = '$login' && `password` = '$pass'");
-        $query = $query->fetch_all();
-        if ($query) {
+
+        $admin = $query->fetch_array();
+
+        if ($admin) {
             $_SESSION['login'] = $login;
             echo 'true';
         }

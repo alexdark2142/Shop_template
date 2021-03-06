@@ -181,9 +181,6 @@ h2 {
   background: #088BD0;
 }
 
-.msg_row {
-  display: none;
-}
 
 /*--------------------------TOAST---------------------------*/
 #toast-container {
@@ -236,6 +233,7 @@ h2 {
 }
 
 .content-modal{
+  height: inherit;
   width: inherit;
   border-radius: 7px;
   padding: 10px 30px 30px;
@@ -264,9 +262,28 @@ color: red;
 transform: rotate(90deg);
 }
 .modal_body {
-width: 100%;
-box-shadow: 0 4px 12px rgba(0, 0, 0, .8), 0 16px 20px  rgba(0, 0, 0, .8);
-margin: 15px auto;
+  max-height: 86%;
+  overflow: auto;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .8), 0 16px 20px  rgba(0, 0, 0, .8);
+  margin: 15px auto;
+}
+
+@media (max-width: 662px) {
+  .modal_body {
+    max-height: 80%;
+  }
+}
+@media (max-height: 450px) {
+  .modal_body {
+    max-height: 78%;
+  }
+}
+
+@media (max-width: 513px) {
+  .modal_body {
+    max-height: 74%;
+  }
 }
 
 .table-modal {
@@ -309,3 +326,23 @@ padding-top: 100%; /* (300 / 300) * 100%; */
   width: 100px;
   padding: 10px;
 }
+
+.vip, .premium, .classic {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  background-color: #E41462;
+  padding: 7px;
+  border-radius: 5px;
+}
+
+.premium {
+  background-color: gold;
+}
+
+.classic {
+  color: black;
+  background-color: white;
+}
+
+

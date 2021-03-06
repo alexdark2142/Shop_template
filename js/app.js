@@ -161,14 +161,19 @@ function getOptions(self, id) {
             }
         });
     }
-    else {
+    else if (idValue == 'delete') {
         $.ajax({
             method: "POST",
             url: "action/users.php",
-            data: {id_user:id, action_id:idValue, description:description},
-            success:function (data){
+            data: {id_user:id, action_id:idValue},
+            success:function (){
+                let el = self;
+                while ((el = el.parentElement) && !el.classList.contains('user'));
                 M.toast({html: 'Пользователь удален!', classes: 'success'});
-                $('#user_'+id).hide('slow');
+                el.parentNode.removeChild(el);
+            },
+            error:function () {
+                M.toast({html: 'Ошибка при удалении!', classes: 'error'});
             }
         });
     }
@@ -191,7 +196,21 @@ function deletePeople(self, id) {
         data:{id:id},
         success:function (data) {
             if (data == 'success') {
-                self.parentNode.parentNode.parentNode.removeChild(self.parentNode.parentNode);
+                let el = self;
+
+                while ((el = el.parentElement) && !el.classList.contains('container-form'));
+
+                el.childNodes[1].innerText = el.childNodes[1].innerText-1;
+                if (el.childNodes[1].innerText > 0) {
+                    self.parentNode.parentNode.parentNode.removeChild(self.parentNode.parentNode);
+                }
+                else {
+                    let el = self;
+                    let newDiv = document.createElement("div");
+                    newDiv.innerHTML = '<h2 class=\\"d-flex align-items-center justify-content-center\\">У этого пользователя нет анкет для показа</h2>';
+                    while ((el = el.parentElement) && !el.classList.contains('table'));
+                    el.replaceWith(newDiv);
+                }
                 M.toast({html: 'Анкета удалена.', classes: 'success'});
             }
         }

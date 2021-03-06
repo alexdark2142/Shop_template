@@ -7,6 +7,7 @@ $id = $_POST['id'];
 $path = '../../img/';
 $dirs = ['extedns_photo_people', 'people_history', 'proverka_photo'];
 
+
 $people = $link->query("DELETE `people`, `history`, `extends_photo`, `comments`
             FROM `people`
             LEFT JOIN `history` ON `history`.`id_people` = `people`.`id`
