@@ -4,23 +4,28 @@ require_once '../db/db.php';
 
 $limit = 3;
 
+$filter = strval(@$_GET['filter']);
+$text = strval(@$_GET['text']);
+
 $page = intval(@$_GET['page']);
 $page = (empty($page)) ? 1 : $page;
 $start = ($page != 1) ? $page * $limit - $limit : 0;
-$query = $link->query(
-  "SELECT 
-    `user`.`id`, `user`.`login`, `user`.`email`, `user`.`balance`, COUNT(`people`.`id`) AS `count`, `user`.`ban`
-  FROM
-    `user`
-  LEFT JOIN 
-    `people` ON `user`.`id` = `people`.`id_user`
-  GROUP BY
-    `user`.`id` 
-  ORDER BY `id` ASC LIMIT {$start},{$limit}");
 
-while($res[]=$query->fetch_array()) {
-    $users = $res;
-};
+$adding = '';
+
+if ($filter != 0) {
+    $adding =  "AND `ban` = {$filter}";
+}
+
+$query = $link->query(
+    "SELECT `user`.`id`, `user`.`login`, `user`.`email`, `user`.`balance`, COUNT(`people`.`id`) AS `count`, `user`.`ban`
+  FROM `user` LEFT JOIN `people` ON `user`.`id` = `people`.`id_user`
+  WHERE (`login` like '{$text}%' OR `email` like '{$text}%') {$adding}
+  GROUP BY`user`.`id` 
+  ORDER BY `id` ASC LIMIT {$start}, {$limit}");
+while ($user[] = $query->fetch_array()) {
+    $users = $user;
+}
 
 foreach ($users as $user) {
   $query_people = $link->query(
@@ -29,11 +34,11 @@ foreach ($users as $user) {
     WHERE `id_user` = '$user[0]'
     ORDER BY `date_created` DESC");
 
-  while($res[]=$query->fetch_array()) {
-      $people = $res;
-  };
+  while($res[]=$query_people->fetch_array()) {
+    $people = $res;
+  }
 ?>
-  <tr id="user_<?php echo $user[0]; ?>" >
+  <tr id="user_<?php echo $user[0]; ?>" class="user">
     <th scope="row"><?php echo $user[0]; ?></th>
     <td><?php echo $user[1]; ?></td>
     <td><?php echo $user[2]; ?></td>
@@ -100,7 +105,7 @@ foreach ($users as $user) {
         </div>
       </div>
     </td>
-    <td><?php echo ($user[5] == -1) ? 'Заблокирован' : (($user[5] == 1) ? 'В черном списке' : ''); ?></td>
+    <td class="status-show"><?php echo ($user[5] == -1) ? 'Заблокирован' : (($user[5] == 1) ? 'В черном списке' : ''); ?></td>
     <td>
       <select id="action_<?php echo $user[0]; ?>" name="select" class="custom-select">
         <option value="add_black_list">Добавить в черный список</option>
@@ -115,3 +120,5 @@ foreach ($users as $user) {
   </tr>
 <?php
 }
+
+

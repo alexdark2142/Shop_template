@@ -216,3 +216,38 @@ function deletePeople(self, id) {
         }
     });
 }
+
+function showMoreUsers (self, text, filter) {
+    let $target = $(self);
+    let page = $target.attr('data-page');
+    page++;
+    
+    $.ajax({
+        url: '/admin/action/add_users.php?page=' + page + '&filter=' + filter + '&text=' + text,
+        dataType: 'html',
+        success: function(data){
+            $('#users-list').append(data);
+        }
+    });
+
+
+
+    $target.attr('data-page', page);
+    if (page ==  $target.attr('data-max')) {
+        $target.hide();
+    }
+
+    return false;
+}
+
+function searchUsers(filter) {
+    let text = document.getElementById('search-user').value;
+    
+    $.ajax({
+        url: '/admin/page/users.php?search=' + text + '&filter=' + filter,
+        dataType: 'html',
+        success: function(data){
+            $('#users-container').replaceWith(data);
+        }
+    });
+}
