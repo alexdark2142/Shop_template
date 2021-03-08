@@ -2,9 +2,9 @@
 
 require_once '../db/db.php';
 
-$limit = 3;
+$limit = 5;
 
-$filter = strval(@$_GET['filter']);
+$filter = intval(@$_GET['filter']);
 $text = strval(@$_GET['text']);
 
 $page = intval(@$_GET['page']);
@@ -13,7 +13,7 @@ $start = ($page != 1) ? $page * $limit - $limit : 0;
 
 $adding = '';
 
-if ($filter != 0) {
+if ($filter !== 0) {
     $adding =  "AND `ban` = {$filter}";
 }
 

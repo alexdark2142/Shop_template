@@ -16,7 +16,7 @@ $query = $link->query(
   FROM `user` LEFT JOIN `people` ON `user`.`id` = `people`.`id_user`
   WHERE (`login` like '{$text}%' OR `email` like '{$text}%') {$adding}
   GROUP BY`user`.`id` 
-  ORDER BY `id` ASC LIMIT 3");
+  ORDER BY `id` ASC LIMIT 5");
 while ($user[] = $query->fetch_array()) {
   $users = $user;
 }
@@ -38,19 +38,24 @@ else {
 }
 
 $cont = $users_count['count'];
-$amt = ceil($cont / 3);
+$amt = ceil($cont / 5);
 
 ?>
 <div id="users-container">
   <div class="page__header row d-flex align-items-center">
     <div class="col-3 header-nav d-flex">
       <div class="nav-radio d-flex align-items-center">
-        <input id="filter"   type="radio" name="filter" <?php echo ($filter == -1) ? 'checked ': ''?> onclick="searchUsers(-1)" value="-1">
+        <input id="filter"   type="radio" name="filter" <?php echo ($filter == -1) ? 'checked ': ''?> onclick="searchUsers(-1)">
         <img  class="img-nav" src="img/blocked.png" alt="block">
       </div>
       <div class="nav-radio d-flex align-items-center">
-        <input id="filter" type="radio" name="filter" <?php echo ($filter == 1) ? 'checked ': ''?> onclick="searchUsers(1)" value="1">
+        <input id="filter" type="radio" name="filter" <?php echo ($filter == 1) ? 'checked ': ''?> onclick="searchUsers(1)">
         <img class="img-nav" src="img/blacklist.png" alt="black-list">
+      </div>
+      <div class="nav-radio d-flex align-items-center">
+        <button class="reset" onclick="searchUsers(0)">
+          <img class="img-nav" src="img/reset.png" alt="reset">
+        </button>
       </div>
     </div>
     <div class="col header-title d-flex  justify-content-center img-nav">
@@ -191,7 +196,7 @@ $amt = ceil($cont / 3);
 </div>
 
 <script>
-  if (parseInt(<?php echo $cont?>, 10) < 4) {
+  if (parseInt(<?php echo $cont?>, 10) < 6) {
     $('#show-more-button').hide();
   }
 </script>
