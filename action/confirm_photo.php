@@ -7,14 +7,12 @@ $id = $_POST['id'];
 $check_photo = $_POST['photo'];
 $name = $_POST['name'];
 
+$dir = '../../img/proverka_photo/' . trim($id);
 $query = $link->query("UPDATE `people` SET `proverka_photo` = '$check_photo' WHERE `id`= '$id' ");
 
-$dir = '../../img/proverka_photo/' . trim($id);
-
 if ($query) {
-    echo 'success';
+  $RDir = new removeDir();
+  $deleteDir = $RDir->RDir($dir);
+  echo 'success';
 }
 
-$RDir = new removeDir();
-
-$deleteDir = $RDir->RDir($dir);

@@ -9,11 +9,12 @@ $msg = $_POST['msg'];
 $theme = $_POST['theme'];
 
 $send_msg = $link->query(
-    "INSERT INTO `messages`(`id_to`, `id_from`, `msg`, `theme`) 
-    VALUES ('$id_to','$id_from','$msg', '$theme')");
+  "INSERT INTO `messages`(`id_to`, `id_from`, `msg`, `theme`) 
+  VALUES ('$id_to','$id_from','$msg', '$theme')"
+);
 
 
 if ($send_msg) {
-    $delete_msg = $link->query("DELETE FROM `messages` WHERE `id` = '$id'");
-    echo 'true';
+  $delete_msg = $link->query("DELETE FROM `messages` WHERE `id` = '$id'");
+  echo 'true';
 }
