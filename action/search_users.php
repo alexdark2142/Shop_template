@@ -74,7 +74,27 @@ if (!empty($users)) {
         <th scope="row"><?php echo $user[0]; ?></th>
         <td><?php echo $user[1]; ?></td>
         <td><?php echo $user[2]; ?></td>
-        <td><?php echo $user[3]; ?></td>
+        <td>
+          <div class="container-form">
+            <button onclick="openModal(this)" id="openModal" class="btn-show-form"><?php echo $user[3]; ?> &#8381</button>
+            <div id="modal" class="modal d-flex align-items-center justify-content-center">
+              <div class="content-modal balance-content">
+                <div class="modal_header d-flex">
+                  <h1 class="col-11 modal-title d-flex align-items-center justify-content-center">Изменить баланс пользователя"<?php echo $user[1]; ?>"</h1>
+                  <div id="close_modal" class="col d-flex align-items-center justify-content-end"
+                       onclick="closeModal(this)"><img src="img/close.png" alt="X"></div>
+                </div>
+                <div class="modal_body balance-body input-group mb-3">
+                  <div class="form-group balance-text">
+                    <input id="balance" name="balance" type="number"  class="form-control" placeholder="Баланс" aria-label="Recipient's username"
+                           aria-describedby="basic-addon2" >
+                    <button type="submit" onclick="changeBalance(this, <?php echo $user[0]; ?>)" class="btn btn-outline-secondary">Изменить</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
         <td>
           <div class="container-form">
             <button onclick="openModal(this)" id="openModal" class="btn-show-form"><?php echo $user[4]; ?></button>

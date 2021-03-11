@@ -242,7 +242,6 @@ tbody, td, tfoot, th, thead, tr{
   border-radius: 7px;
   padding: 10px 30px 30px;
   background-color: #1a1a1d;
-
 }
 
 .modal_header h1{
@@ -349,7 +348,31 @@ padding-top: 100%; /* (300 / 300) * 100%; */
   background-color: white;
 }
 
-/*-------PageUsers------*/
+.balance-content {
+  width: auto;
+  height: auto;
+}
+
+.balance-body {
+  box-shadow: none;
+  background: none;
+  padding: 0 20px;
+}
+
+.balance-text {
+  display: flex;
+  width: 100%;
+}
+
+.balance-text input{
+  border-radius: 5px 0 0 5px;
+}
+
+.balance-text button{
+  border-radius: 0 5px 5px 0;
+}
+
+  /*-------PageUsers------*/
 
 .header-title {
   min-width: 150px;
@@ -392,3 +415,4 @@ padding-top: 100%; /* (300 / 300) * 100%; */
 .reset {
   background: none;
 }
+

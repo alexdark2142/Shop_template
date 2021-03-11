@@ -210,6 +210,7 @@ function deletePeople(self, id) {
 }
 
 function showMoreUsers(self, text, filter) {
+ 
 	let $target = $(self);
 	let page = $target.attr('data-page');
 	page++;
@@ -257,4 +258,28 @@ function searchUsers(self, filter, input) {
 			}
 		});
 	}
+}
+
+function changeBalance(self, id) {
+	let balance = self.previousSibling.previousSibling.value;
+	let el = self;
+	while ((el = el.parentElement) && !el.classList.contains('container-form')) ;
+	$.ajax({
+		method: "POST",
+		url: "action/change_balance.php",
+		data: {id_user: id, balance_value: balance},
+		success: function (data) {
+			if (data =='success') {
+				self.parentNode.parentNode.parentNode.parentNode.style.transform = "scale(0)";
+				document.body.style.overflow = "visible";
+				el.childNodes[1].innerText = balance + ' ₽';
+				M.toast({html: 'Баланс изменен!', classes: 'success'});
+			} else {
+				M.toast({html: 'Пустое значение!', classes: 'warning'});
+			}
+		},
+		error: function () {
+			M.toast({html: 'Ошибка при изменении!', classes: 'error'});
+		}
+	});
 }

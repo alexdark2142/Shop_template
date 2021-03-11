@@ -12,7 +12,6 @@ $(document).ready(function (){
 
                 if (data == 'login') {
                     msg.html('<div class="alert alert-warning">Введите логин!</div>');
-                    console.log('hi');
                 }
                 else if (data == 'pass') {
                     msg.html('<div class="alert alert-warning">Введите пароль!</div>');

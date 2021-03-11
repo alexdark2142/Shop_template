@@ -80,7 +80,6 @@ else {
                 url: '/admin/action/add_msg.php?page=' + page,
                 dataType: 'html',
                 success: function(data){
-                    console.log(data);
                     $('#show-more-list .msg-list').append(data);
                 }
             });
